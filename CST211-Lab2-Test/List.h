@@ -22,8 +22,13 @@ class DoublyLinkList {
 private:
 	Node* head;
 public:
-	bool isEmpty();
+	DoublyLinkList();
+	bool isEmpty(); // checks if the link list is empty
+
 };
+
+template<typename T>
+DoublyLinkList<T>::DoublyLinkList() : head(nullptr) {}
 
 template<typename T>
 bool DoublyLinkList<T>::isEmpty()
