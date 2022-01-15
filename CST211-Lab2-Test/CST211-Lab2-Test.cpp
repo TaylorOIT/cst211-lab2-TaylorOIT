@@ -9,7 +9,10 @@ int main() {
 		List.Prepend(i);
 	}
 
-	List.PrintForwards();
+	//List.PrintForwards();
+
+	cout << List.First();
+
 }
 
 

@@ -28,6 +28,8 @@ public:
 	bool isEmpty(); // checks if the link list is empty
 	void Prepend(T data); // add data at the front of the link list
 	void PrintForwards(); // prints the entire link list forwards
+	const T& First(); // returns the first element in the link list
+
 
 };
 
@@ -76,6 +78,14 @@ void DoublyLinkList<T>::PrintForwards()
 		cout << "null " << endl;
 	}
 
+}
+
+template<typename T>
+const T& DoublyLinkList<T>::First()
+{
+	Node<T>* curr = head;
+	curr->nextElement;
+	return curr->data;
 }
 
 #endif
