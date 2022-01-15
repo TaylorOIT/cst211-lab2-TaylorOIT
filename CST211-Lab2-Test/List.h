@@ -12,7 +12,7 @@ public:
 	T data;
 	Node* nextElement;
 	Node* prevElement;
-	Node(); // Default ctor
+	Node(); // default constructor
 };
 
 template<typename T>
@@ -25,16 +25,36 @@ private:
 	Node<T>* tail;
 public:
 	DoublyLinkList(); // default constructor
+	~DoublyLinkList(); // destructer
 	bool isEmpty(); // checks if the link list is empty
 	void Prepend(T data); // add data at the front of the link list
+	void Append(T data);
 	void PrintForwards(); // prints the entire link list forwards
 	const T& First(); // returns the first element in the link list
 	const T& Last(); // return the last element in the link list
+
 
 };
 
 template<typename T>
 DoublyLinkList<T>::DoublyLinkList() : head(nullptr),tail(nullptr) {}
+
+template<typename T>
+DoublyLinkList<T>::~DoublyLinkList()
+{
+	Node<T>* curr = head;
+	curr = curr->nextElement;
+	cout << "---------------------------------------------------" << endl;
+	cout << "~DoublyLinkList" << endl;
+	PrintForwards();
+	while (head != nullptr) {
+		curr = head;
+		head = head->nextElement;
+		delete curr;
+		PrintForwards();
+	}
+	cout << "---------------------------------------------------" << endl;
+}
 
 template<typename T>
 bool DoublyLinkList<T>::isEmpty()
@@ -50,7 +70,6 @@ void DoublyLinkList<T>::Prepend(T data)
 {
 	Node<T>* newNode = new Node<T>;
 	newNode->data = data;
-	newNode->prevElement = nullptr;
 	newNode->nextElement = head;
 	if (head != nullptr) {
 		head->prevElement = newNode;
@@ -58,6 +77,21 @@ void DoublyLinkList<T>::Prepend(T data)
 	head = newNode;
 	cout << data << " inserted at front of list!" << endl;
 
+}
+
+template<typename T>
+void DoublyLinkList<T>::Append(T data)
+{
+	Node<T>* newNode = new Node<T>;
+	newNode->data = data;
+	
+	Node<T>* curr = head;
+	while (curr->nextElement != nullptr) {
+		curr = curr->nextElement;
+	}
+
+	curr->nextElement = newNode;
+	cout << data << " inserted at back of list!" << endl;
 }
 
 template<typename T>

@@ -11,8 +11,8 @@ int main() {
 
 	List.PrintForwards();
 
-	cout << List.Last();
-
+	List.Append(2);
+	List.PrintForwards();
 }
 
 
