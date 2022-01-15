@@ -2,6 +2,7 @@
 #define LIST_H
 
 #include <iostream> 
+#include "Exception.h"
 using std::cout;
 using std::endl;
 
@@ -19,13 +20,13 @@ template<typename T>
 Node<T>::Node() : nextElement(nullptr), prevElement(nullptr) {}
 
 template<typename T>
-class DoublyLinkList {
+class List {
 private:
 	Node<T>* head;
 	Node<T>* tail;
 public:
-	DoublyLinkList(); // default constructor
-	~DoublyLinkList(); // destructer
+	List(); // default constructor
+	~List(); // destructer
 	void Purge(); // deletes the entire linklist
 	void Extract(T data);
 	bool isEmpty(); // checks if the link list is empty
@@ -41,16 +42,16 @@ public:
 };
 
 template<typename T>
-DoublyLinkList<T>::DoublyLinkList() : head(nullptr),tail(nullptr) {}
+List<T>::List() : head(nullptr),tail(nullptr) {}
 
 template<typename T>
-DoublyLinkList<T>::~DoublyLinkList()
+List<T>::~List()
 {
 	Node<T>* curr = head;
 	if (curr != nullptr)
 		curr = curr->nextElement;
 	cout << "---------------------------------------------------" << endl;
-	cout << "~DoublyLinkList" << endl;
+	cout << "~List" << endl;
 	PrintForwards();
 	while (head != nullptr) {
 		curr = head;
@@ -62,7 +63,7 @@ DoublyLinkList<T>::~DoublyLinkList()
 }
 
 template<typename T>
-void DoublyLinkList<T>::Purge()
+void List<T>::Purge()
 {
 	Node<T>* curr = head;
 	while (head != nullptr) {
@@ -73,7 +74,7 @@ void DoublyLinkList<T>::Purge()
 }
 
 template<typename T>
-void DoublyLinkList<T>::Extract(T data)
+void List<T>::Extract(T data)
 {
 	Node<T>* curr = head;
 	Node<T>* prev = nullptr;
@@ -112,7 +113,7 @@ void DoublyLinkList<T>::Extract(T data)
 }
 
 template<typename T>
-bool DoublyLinkList<T>::isEmpty()
+bool List<T>::isEmpty()
 {
 	if (head == nullptr)
 		return true;
@@ -121,7 +122,7 @@ bool DoublyLinkList<T>::isEmpty()
 }
 
 template<typename T>
-void DoublyLinkList<T>::Prepend(T data)
+void List<T>::Prepend(T data)
 {
 	Node<T>* newNode = new Node<T>;
 	newNode->data = data;
@@ -135,7 +136,7 @@ void DoublyLinkList<T>::Prepend(T data)
 }
 
 template<typename T>
-void DoublyLinkList<T>::Append(T data)
+void List<T>::Append(T data)
 {
 	Node<T>* newNode = new Node<T>;
 	newNode->data = data;
@@ -151,7 +152,7 @@ void DoublyLinkList<T>::Append(T data)
 }
 
 template<typename T>
-void DoublyLinkList<T>::InsertAfter(T new_item, T existing_item)
+void List<T>::InsertAfter(T new_item, T existing_item)
 {
 	Node<T>* newNode = new Node<T>;
 	newNode->data = new_item;
@@ -170,7 +171,7 @@ void DoublyLinkList<T>::InsertAfter(T new_item, T existing_item)
 }
 
 template<typename T>
-void DoublyLinkList<T>::InsertBefore(T new_item, T existing_item)
+void List<T>::InsertBefore(T new_item, T existing_item)
 {
 	Node<T>* newNode = new Node<T>;
 	newNode->data = new_item;
@@ -201,7 +202,7 @@ void DoublyLinkList<T>::InsertBefore(T new_item, T existing_item)
 }
 
 template<typename T>
-void DoublyLinkList<T>::PrintForwards()
+void List<T>::PrintForwards()
 {
 	if (isEmpty()) {
 		cout << "List is Empty!" << endl;
@@ -221,7 +222,7 @@ void DoublyLinkList<T>::PrintForwards()
 }
 
 template<typename T>
-void DoublyLinkList<T>::PrintBackwards()
+void List<T>::PrintBackwards()
 {
 	Node<T>* tail = head;
 	while (tail->nextElement != nullptr) {
@@ -236,7 +237,7 @@ void DoublyLinkList<T>::PrintBackwards()
 }
 
 template<typename T>
-const T& DoublyLinkList<T>::First()
+const T& List<T>::First()
 {
 	Node<T>* curr = head;
 	curr->nextElement;
@@ -244,7 +245,7 @@ const T& DoublyLinkList<T>::First()
 }
 
 template<typename T>
-const T& DoublyLinkList<T>::Last()
+const T& List<T>::Last()
 {
 	Node<T>* curr = head;
 	while (curr->nextElement != nullptr) {
