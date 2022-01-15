@@ -16,7 +16,7 @@ public:
 	Exception& operator =(const Exception& rhs);
 	Exception& operator =(Exception&& rhs);
 	const char* getMessage();
-	void SetMessage(const char* msg);
+	void setMessage(const char* msg);
 	friend std::ostream& operator <<(std::ostream& stream, const Exception& except);
 };
 

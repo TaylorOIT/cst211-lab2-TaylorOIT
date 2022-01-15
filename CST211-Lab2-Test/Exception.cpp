@@ -18,7 +18,7 @@ const char* Exception::getMessage() {
 	return m_msg;
 }
 
-void Exception::SetMessage(const char* msg) {
+void Exception::setMessage(const char* msg) {
 	delete[] m_msg;
 	m_msg = new char[strlen(msg) + 1];
 	strcpy_s(m_msg, strlen(msg) + 1, msg);
