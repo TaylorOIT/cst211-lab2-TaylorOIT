@@ -31,6 +31,7 @@ public:
 	bool isEmpty(); // checks if the link list is empty
 	void Prepend(T data); // add data at the front of the link list
 	void Append(T data); // add data at the end of the link list
+	void InsertAfter(T new_item,T existing_item); // inserts after existing item in link list
 	void PrintForwards(); // prints the entire link list forwards
 	void PrintBackwards(); // print the entire link list backwards
 	const T& First(); // returns the first element in the link list
@@ -146,6 +147,25 @@ void DoublyLinkList<T>::Append(T data)
 
 	curr->nextElement = newNode;
 	cout << data << " inserted at back of list!" << endl;
+}
+
+template<typename T>
+void DoublyLinkList<T>::InsertAfter(T new_item, T existing_item)
+{
+	Node<T>* newNode = new Node<T>;
+	newNode->data = new_item;
+
+	Node<T>* curr = head;
+	while (curr != nullptr) {
+		if (curr->data == existing_item) {
+			newNode->prevElement = curr;
+			newNode->nextElement = curr->nextElement;
+			curr->nextElement = newNode;
+			break;
+		}
+		else
+			curr = curr->nextElement;
+	}
 }
 
 template<typename T>

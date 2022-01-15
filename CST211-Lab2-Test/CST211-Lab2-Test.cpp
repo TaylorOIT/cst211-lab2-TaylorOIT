@@ -12,6 +12,8 @@ int main() {
 	List.Extract(3);
 	//List.Purge();
 	List.PrintForwards();
+	List.InsertAfter(3, 6);
+	List.PrintForwards();
 
 	//cout << List.Last() << endl;
 
