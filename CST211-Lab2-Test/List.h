@@ -29,8 +29,9 @@ public:
 	void Purge(); // deletes the entire linklist
 	bool isEmpty(); // checks if the link list is empty
 	void Prepend(T data); // add data at the front of the link list
-	void Append(T data);
+	void Append(T data); // add data at the end of the link list
 	void PrintForwards(); // prints the entire link list forwards
+	void PrintBackwards(); // print the entire link list backwards
 	const T& First(); // returns the first element in the link list
 	const T& Last(); // return the last element in the link list
 
@@ -102,6 +103,7 @@ void DoublyLinkList<T>::Append(T data)
 	Node<T>* curr = head;
 	while (curr->nextElement != nullptr) {
 		curr = curr->nextElement;
+		newNode->prevElement = curr;
 	}
 
 	curr->nextElement = newNode;
@@ -129,6 +131,21 @@ void DoublyLinkList<T>::PrintForwards()
 }
 
 template<typename T>
+void DoublyLinkList<T>::PrintBackwards()
+{
+	Node<T>* tail = head;
+	while (tail->nextElement != nullptr) {
+		tail = tail->nextElement;
+	}
+	cout << "List : ";
+	while (tail != nullptr) {
+		cout << tail->data << " -> ";
+		tail = tail->prevElement;
+	}
+	cout << "null " << endl;
+}
+
+template<typename T>
 const T& DoublyLinkList<T>::First()
 {
 	Node<T>* curr = head;
@@ -140,7 +157,6 @@ template<typename T>
 const T& DoublyLinkList<T>::Last()
 {
 	Node<T>* curr = head;
-	curr->nextElement;
 	while (curr->nextElement != nullptr) {
 		curr = curr->nextElement;
 	}

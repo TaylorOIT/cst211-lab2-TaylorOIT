@@ -10,10 +10,12 @@ int main() {
 	}
 
 	List.PrintForwards();
-
+	List.PrintBackwards();
 	List.Append(2);
 	List.PrintForwards();
-	List.Purge();
+	List.PrintBackwards();
+	cout << List.Last() << endl;
+
 }
 
 
