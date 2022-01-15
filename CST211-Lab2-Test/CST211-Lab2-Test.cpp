@@ -1,51 +1,65 @@
 
 #include <iostream>
+#include <string>
 #include "List.h"
+using std::string;
+
+const char* NAMES[] = { "Kyle", "Brit", "Seth", "Alex", "Josh", "Kian",
+"Kate", "Terry", "Ann", "Elaine", "Stephanie", "Wanda", "Oscar",
+"Oliver", "Tobey" };
+
+List<string> ReturnStrList()
+{
+	List<string> tempList;
+	for (int i = 0; i < 10; ++i)
+		tempList.Append(NAMES[i]);
+	return tempList;
+}
 
 int main() {
-		bool pass = true;
-	
-		List<int> test_list;
-		for (int i = 0; i < 10; ++i)
-			test_list.Append(i);
-	
-		List<int> list_test(test_list);
-	
-		// Check data integrity
-		for (int i = 0; i < 10; ++i)
-		{
-			if (list_test.First() != test_list.First())
-				pass = false;
-			list_test.Extract(i); //Remove first value
-			test_list.Extract(i);
-		}
-	
-		cout << "Copy ctor test ";
-		cout << pass;
+	bool pass = true;
+
+	List<string> test_list;
+	for (int i = 0; i < 10; ++i)
+		test_list.Append(NAMES[i]); 
+
+	List<string> list_test;
+
+	list_test = test_list;
+	//list_test = ReturnStrList(); // doesn't work
+
+	list_test.PrintForwards();
+	test_list.PrintForwards();
+
+	 // Check data integrity
+
+	cout << "Op equals test complex ";
+
+	cout << pass;
 }
 
 
 
-/*********************************************************************
-* Author: Junmin Yee
-* File Name: main.cpp
-* Date Created: 08/01/2018
-* Modifications:
-*	10/01/2020 - Increase test coverage
-*********************************************************************/
-/*********************************************************************
-* Lab/Assignment: Assignment02 - Doubly Linked List ADT
-*
-* Overview:
-*	This program will test a templated Double Linked List
-*
-* Input:
-*	None.
-*
-* Output:
-*	Testing output.
-*
-**********************************************************************/
+///*********************************************************************
+//* Author: Junmin Yee
+//* File Name: main.cpp
+//* Date Created: 08/01/2018
+//* Modifications:
+//*	10/01/2020 - Increase test coverage
+//*********************************************************************/
+///*********************************************************************
+//* Lab/Assignment: Assignment02 - Doubly Linked List ADT
+//*
+//* Overview:
+//*	This program will test a templated Double Linked List
+//*
+//* Input:
+//*	None.
+//*
+//* Output:
+//*	Testing output.
+//*
+//**********************************************************************/
 //#define _CRT_SECURE_NO_WARNINGS
 //#define _CRTDBG_MAP_ALLOC
 //
@@ -73,10 +87,10 @@ int main() {
 //
 //// Test function declaration
 //bool test_default_ctor();
-////bool test_copy_ctor();
-////bool test_move_ctor();
-////bool test_op_equal();
-////bool test_move_op_equal();
+//bool test_copy_ctor();
+//bool test_move_ctor();
+//bool test_op_equal();
+//bool test_move_op_equal();
 //bool test_is_empty();
 //bool test_first_with_value();
 //bool test_first_empty_list();
@@ -96,9 +110,9 @@ int main() {
 //bool test_insertb_no_match();
 //
 //bool test_default_ctor_complex();
-////bool test_copy_ctor_complex();
-////bool test_move_ctor_complex();
-////bool test_op_equal_complex();
+//bool test_copy_ctor_complex();
+//bool test_move_ctor_complex();
+//bool test_op_equal_complex();
 ////bool test_move_op_equal_complex();
 //bool test_is_empty_complex();
 //bool test_first_with_value_complex();
@@ -123,11 +137,15 @@ int main() {
 //List<string> ReturnStrList();
 //
 //// Array of test functions
-//FunctionPointer test_functions[] = { test_default_ctor, test_is_empty, test_first_with_value,
+//FunctionPointer test_functions[] = { test_default_ctor, test_copy_ctor, test_move_ctor,
+//test_op_equal, test_move_op_equal, 
+//test_is_empty, test_first_with_value,
 //test_first_empty_list, test_last_with_value, test_last_empty_list, test_prepend,
 //test_append, test_purge, test_extract_empty, test_extract_match, test_extract_no_match,
 //test_inserta_empty, test_inserta_match, test_inserta_no_match, test_insertb_empty,
-//test_insertb_match, test_insertb_no_match, test_default_ctor_complex,
+//test_insertb_match, test_insertb_no_match, test_default_ctor_complex, test_copy_ctor_complex,
+//test_move_ctor_complex, test_op_equal_complex, 
+////test_move_op_equal_complex,
 //test_is_empty_complex, test_first_with_value_complex, test_first_empty_list_complex,
 //test_last_with_value_complex, test_last_empty_list_complex,
 //test_prepend_complex, test_append_complex, test_purge_complex,
@@ -753,25 +771,25 @@ int main() {
 //	return pass;
 //}
 //
-//bool test_move_op_equal_complex()
-//{
-//	bool pass = true;
-//
-//	List<string> test_list;
-//	test_list = ReturnStrList(); //Op =
-//
-//	 // Check data integrity
-//	for (int i = 0; i < NUM_NAMES; ++i)
-//	{
-//		if (NAMES[i] != test_list.First())
-//			pass = false;
-//		test_list.Extract(NAMES[i]); //Remove first value
-//	}
-//
-//	cout << "Move op equals test complex ";
-//
-//	return pass;
-//}
+////bool test_move_op_equal_complex()
+////{
+////	bool pass = true;
+////
+////	List<string> test_list;
+////	test_list = ReturnStrList(); //Op =
+////
+////	 // Check data integrity
+////	for (int i = 0; i < NUM_NAMES; ++i)
+////	{
+////		if (NAMES[i] != test_list.First())
+////			pass = false;
+////		test_list.Extract(NAMES[i]); //Remove first value
+////	}
+////
+////	cout << "Move op equals test complex ";
+////
+////	return pass;
+////}
 //
 //bool test_is_empty_complex()
 //{

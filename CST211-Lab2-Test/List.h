@@ -27,6 +27,9 @@ private:
 public:
 	List(); // default constructor
 	List(const List<T>& copy); // copy constructor
+	List(List<T>&& copy); // move constructor
+	List& operator =(const List<T>& rhs); // copy assignment
+	List& operator =(List<T>&& rhs);// move assignment
 	~List(); // destructer
 	void Purge(); // deletes the entire linklist
 	void Extract(T data); // deletes a selected element in the link list
@@ -59,6 +62,57 @@ List<T>::List(const List<T>& copy)
 }
 
 template<typename T>
+List<T>::List(List<T>&& copy)
+{
+
+	if (this != &copy){
+		Purge();
+		Node<T>* curr = copy.head;
+		while (curr != nullptr) {
+			Append(curr->data);
+			curr = curr->nextElement;
+		}
+		copy.Purge();
+		copy.head = nullptr;
+	}
+}
+
+template<typename T>
+List<T>& List<T>::operator=(const List<T>& rhs)
+{
+	if (this != &rhs)
+	{
+		Purge();
+		
+		Node<T>* curr = rhs.head;
+		while (curr != nullptr) {
+			Append(curr->data);
+			curr = curr->nextElement;
+		}
+
+	}
+	return *this;
+}
+
+template<typename T>
+List<T>& List<T>::operator=(List<T>&& rhs)
+{
+	if (this != &rhs)
+	{
+		Purge();
+		
+		Node<T>* curr = rhs.head;
+		while (curr != nullptr) {
+			Append(curr->data);
+			curr = curr->nextElement;
+		}
+		rhs.Purge();
+		rhs.head = nullptr;
+	}
+	return *this;
+}
+
+template<typename T>
 List<T>::~List()
 {
 	Node<T>* curr = head;
@@ -74,12 +128,12 @@ List<T>::~List()
 template<typename T>
 void List<T>::Purge()
 {
-	Node<T>* curr = head;
-	while (head != nullptr) {
-		curr = head;
-		head = head->nextElement;
-		delete curr;
-	}
+		Node<T>* curr = head;
+		while (head != nullptr) {
+			curr = head;
+			head = head->nextElement;
+			delete curr;
+		}
 }
 
 template<typename T>
@@ -130,9 +184,9 @@ void List<T>::Prepend(T data)
 	Node<T>* newNode = new Node<T>;
 	newNode->data = data;
 	newNode->nextElement = head;
-	if (head != nullptr) {
+	newNode->prevElement = nullptr;
+	if (head != nullptr)
 		head->prevElement = newNode;
-	}
 	head = newNode;
 
 }
@@ -146,8 +200,8 @@ void List<T>::Append(T data)
 
 		Node<T>* curr = head;
 		while (curr->nextElement != nullptr) {
-			curr = curr->nextElement;
 			newNode->prevElement = curr;
+			curr = curr->nextElement;
 		}
 
 		curr->nextElement = newNode;
