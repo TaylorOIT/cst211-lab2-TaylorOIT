@@ -32,6 +32,7 @@ public:
 	void Prepend(T data); // add data at the front of the link list
 	void Append(T data); // add data at the end of the link list
 	void InsertAfter(T new_item,T existing_item); // inserts after existing item in link list
+	void InsertBefore(T new_item, T existing_item); // inserts before existing item in link list
 	void PrintForwards(); // prints the entire link list forwards
 	void PrintBackwards(); // print the entire link list backwards
 	const T& First(); // returns the first element in the link list
@@ -165,6 +166,37 @@ void DoublyLinkList<T>::InsertAfter(T new_item, T existing_item)
 		}
 		else
 			curr = curr->nextElement;
+	}
+}
+
+template<typename T>
+void DoublyLinkList<T>::InsertBefore(T new_item, T existing_item)
+{
+	Node<T>* newNode = new Node<T>;
+	newNode->data = new_item;
+
+
+	Node<T>* curr = head;
+	Node<T>* temp = curr;
+	temp = temp->nextElement;
+
+	if (curr->data == existing_item) {
+		Append(new_item);
+		return;
+	}
+	// if head is equal to the existing item, append at front of list.
+
+	while ((curr != nullptr) && (temp != nullptr)) {
+		if (temp->data == existing_item) {
+			newNode->prevElement = curr;
+			newNode->nextElement = curr->nextElement;
+			curr->nextElement = newNode;
+			break;
+		}
+		else {
+			curr = curr->nextElement;
+			temp = temp->nextElement;
+		}
 	}
 }
 
