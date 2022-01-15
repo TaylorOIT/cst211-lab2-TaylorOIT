@@ -2,6 +2,8 @@
 #define LIST_H
 
 #include <iostream> 
+using std::cout;
+using std::endl;
 
 template<typename T>
 class Node
@@ -25,6 +27,7 @@ public:
 	DoublyLinkList(); // default constructor
 	bool isEmpty(); // checks if the link list is empty
 	void Prepend(T data); // add data at the front of the link list
+	void PrintForwards(); // prints the entire link list forwards
 
 };
 
@@ -51,7 +54,27 @@ void DoublyLinkList<T>::Prepend(T data)
 		head->prevElement = newNode;
 	}
 	head = newNode;
-	std::cout << data << " inserted at front of list!" << std::endl;
+	cout << data << " inserted at front of list!" << endl;
+
+}
+
+template<typename T>
+void DoublyLinkList<T>::PrintForwards()
+{
+	if (isEmpty()) {
+		cout << "List is Empty!" << endl;
+	}
+	else
+	{
+		Node<T>* temp = head;   // temp points to head of the list
+		cout << "List : ";
+
+		while (temp != nullptr) {    // traverse through the list
+			cout << temp->data << " -> ";
+			temp = temp->nextElement;
+		}
+		cout << "null " << endl;
+	}
 
 }
 

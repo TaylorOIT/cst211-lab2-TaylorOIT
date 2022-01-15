@@ -9,6 +9,7 @@ int main() {
 		List.Prepend(i);
 	}
 
+	List.PrintForwards();
 }
 
 
