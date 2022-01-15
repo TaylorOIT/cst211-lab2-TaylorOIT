@@ -29,7 +29,7 @@ public:
 	void Prepend(T data); // add data at the front of the link list
 	void PrintForwards(); // prints the entire link list forwards
 	const T& First(); // returns the first element in the link list
-
+	const T& Last(); // return the last element in the link list
 
 };
 
@@ -85,6 +85,17 @@ const T& DoublyLinkList<T>::First()
 {
 	Node<T>* curr = head;
 	curr->nextElement;
+	return curr->data;
+}
+
+template<typename T>
+const T& DoublyLinkList<T>::Last()
+{
+	Node<T>* curr = head;
+	curr->nextElement;
+	while (curr->nextElement != nullptr) {
+		curr = curr->nextElement;
+	}
 	return curr->data;
 }
 
