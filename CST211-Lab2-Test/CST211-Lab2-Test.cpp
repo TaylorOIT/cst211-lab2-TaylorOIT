@@ -9,12 +9,11 @@ int main() {
 		List.Prepend(i);
 	}
 
+	List.Extract(3);
+	//List.Purge();
 	List.PrintForwards();
-	List.PrintBackwards();
-	List.Append(2);
-	List.PrintForwards();
-	List.PrintBackwards();
-	cout << List.Last() << endl;
+
+	//cout << List.Last() << endl;
 
 }
 

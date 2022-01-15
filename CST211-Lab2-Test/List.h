@@ -27,6 +27,7 @@ public:
 	DoublyLinkList(); // default constructor
 	~DoublyLinkList(); // destructer
 	void Purge(); // deletes the entire linklist
+	void Extract(T data);
 	bool isEmpty(); // checks if the link list is empty
 	void Prepend(T data); // add data at the front of the link list
 	void Append(T data); // add data at the end of the link list
@@ -34,8 +35,7 @@ public:
 	void PrintBackwards(); // print the entire link list backwards
 	const T& First(); // returns the first element in the link list
 	const T& Last(); // return the last element in the link list
-
-
+	
 };
 
 template<typename T>
@@ -63,11 +63,49 @@ template<typename T>
 void DoublyLinkList<T>::Purge()
 {
 	Node<T>* curr = head;
-	curr = curr->nextElement;
 	while (head != nullptr) {
 		curr = head;
 		head = head->nextElement;
 		delete curr;
+	}
+}
+
+template<typename T>
+void DoublyLinkList<T>::Extract(T data)
+{
+	Node<T>* curr = head;
+	Node<T>* prev = nullptr;
+
+	bool deleted = false;
+
+	if (isEmpty()) {
+		cout << "List is Empty" << endl;
+		return; 
+	}
+
+	if (curr->data == data) {
+		head = head->nextElement;
+		delete curr;
+		deleted = true;
+	}
+	
+	while (curr != nullptr && deleted == false) {
+		if (data == curr->data) {
+			prev->nextElement = curr->nextElement;
+			delete curr;
+			deleted = true;
+			curr = prev->nextElement;
+			break;
+		}
+		prev = curr;
+		curr = curr->nextElement;
+	}
+
+	if (deleted == false) {
+		cout << data << " does not exist!" << endl;
+	}
+	else {
+		cout << data << " was deleted!" << endl;
 	}
 }
 
@@ -118,10 +156,10 @@ void DoublyLinkList<T>::PrintForwards()
 	}
 	else
 	{
-		Node<T>* temp = head;   // temp points to head of the list
+		Node<T>* temp = head;
 		cout << "List : ";
 
-		while (temp != nullptr) {    // traverse through the list
+		while (temp != nullptr) {
 			cout << temp->data << " -> ";
 			temp = temp->nextElement;
 		}
