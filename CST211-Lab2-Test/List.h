@@ -26,6 +26,7 @@ private:
 public:
 	DoublyLinkList(); // default constructor
 	~DoublyLinkList(); // destructer
+	void Purge(); // deletes the entire linklist
 	bool isEmpty(); // checks if the link list is empty
 	void Prepend(T data); // add data at the front of the link list
 	void Append(T data);
@@ -43,7 +44,8 @@ template<typename T>
 DoublyLinkList<T>::~DoublyLinkList()
 {
 	Node<T>* curr = head;
-	curr = curr->nextElement;
+	if (curr != nullptr)
+		curr = curr->nextElement;
 	cout << "---------------------------------------------------" << endl;
 	cout << "~DoublyLinkList" << endl;
 	PrintForwards();
@@ -54,6 +56,18 @@ DoublyLinkList<T>::~DoublyLinkList()
 		PrintForwards();
 	}
 	cout << "---------------------------------------------------" << endl;
+}
+
+template<typename T>
+void DoublyLinkList<T>::Purge()
+{
+	Node<T>* curr = head;
+	curr = curr->nextElement;
+	while (head != nullptr) {
+		curr = head;
+		head = head->nextElement;
+		delete curr;
+	}
 }
 
 template<typename T>

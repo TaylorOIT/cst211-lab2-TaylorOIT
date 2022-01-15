@@ -13,6 +13,7 @@ int main() {
 
 	List.Append(2);
 	List.PrintForwards();
+	List.Purge();
 }
 
 
