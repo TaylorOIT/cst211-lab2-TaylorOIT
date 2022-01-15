@@ -3,6 +3,11 @@
 
 int main() {
 
+	DoublyLinkList<int> List;
+
+	for (int i = 0; i < 7; i++) {
+		List.Prepend(i);
+	}
 
 }
 
