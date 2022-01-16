@@ -49,7 +49,7 @@ public:
 };
 
 template<typename T>
-List<T>::List() : head(nullptr) {}
+List<T>::List() : head(nullptr), tail(nullptr) {}
 
 template<typename T>
 List<T>::List(const List<T>& copy)
@@ -134,6 +134,7 @@ void List<T>::Purge()
 			head = head->nextElement;
 			delete curr;
 		}
+		tail = nullptr;
 }
 
 template<typename T>
@@ -141,7 +142,7 @@ void List<T>::Extract(T data)
 {
 	if (isEmpty() == true)
 		throw(Exception("The link list is empty!"));
-	
+
 	Node<T>* curr = head;
 	Node<T>* prev = nullptr;
 
@@ -185,31 +186,32 @@ void List<T>::Prepend(T data)
 	newNode->data = data;
 	newNode->nextElement = head;
 	newNode->prevElement = nullptr;
-	if (head != nullptr)
+	if (head != nullptr) {
 		head->prevElement = newNode;
+	}
 	head = newNode;
-
 }
 
 template<typename T>
 void List<T>::Append(T data)
 {
-	if (isEmpty() != true) {
+	
 		Node<T>* newNode = new Node<T>;
 		newNode->data = data;
-
-		Node<T>* curr = head;
-		while (curr->nextElement != nullptr) {
-			newNode->prevElement = curr;
-			curr = curr->nextElement;
+		if (head == nullptr)
+			head = newNode;
+		// if the list is empty, set it equal to the head
+		else
+		{
+			tail = head;
+			while (tail->nextElement != nullptr)
+				tail = tail->nextElement;
+			tail->nextElement = newNode;
+			newNode->prevElement = tail;
 		}
+		// else tranverse the list one before the tail, set the newNode equal to the tail, set tail to previous node.
 
-		curr->nextElement = newNode;
-	}
-	else
-	{
-		Prepend(data);
-	}
+		tail = nullptr;
 }
 
 template<typename T>
@@ -260,7 +262,7 @@ void List<T>::InsertBefore(T new_item, T existing_item)
 		Prepend(new_item);
 		return;
 	}
-	// if head is equal to the existing item, append at front of list.
+	// if head is equal to the existing item, prepend at front of list.
 
 
 	while ((curr != nullptr) && (temp != nullptr)) {
@@ -305,16 +307,19 @@ void List<T>::PrintForwards()
 template<typename T>
 void List<T>::PrintBackwards()
 {
-	Node<T>* tail = head;
+	
+	tail = head;
 	while (tail->nextElement != nullptr) {
 		tail = tail->nextElement;
 	}
 	cout << "List : ";
-	while (tail != nullptr) {
+	while (tail != head) {
 		cout << tail->data << " -> ";
 		tail = tail->prevElement;
 	}
+	cout << tail->data << " -> ";
 	cout << "null " << endl;
+
 }
 
 template<typename T>
