@@ -54,26 +54,14 @@ List<T>::List() : head(nullptr), tail(nullptr) {}
 template<typename T>
 List<T>::List(const List<T>& copy)
 {
-	Node<T>* curr = copy.head;
-	while (curr != nullptr) {
-		Append(curr->data);
-		curr = curr->nextElement;
-	}
+	*this = copy;
 }
 
 template<typename T>
 List<T>::List(List<T>&& copy)
 {
-
 	if (this != &copy){
-		Purge();
-		Node<T>* curr = copy.head;
-		while (curr != nullptr) {
-			Append(curr->data);
-			curr = curr->nextElement;
-		}
-		copy.Purge();
-		copy.head = nullptr;
+		*this = std::move(copy);
 	}
 }
 
@@ -89,7 +77,6 @@ List<T>& List<T>::operator=(const List<T>& rhs)
 			Append(curr->data);
 			curr = curr->nextElement;
 		}
-
 	}
 	return *this;
 }
@@ -115,26 +102,22 @@ List<T>& List<T>::operator=(List<T>&& rhs)
 template<typename T>
 List<T>::~List()
 {
-	Node<T>* curr = head;
-	if (curr != nullptr)
-		curr = curr->nextElement;
-	while (head != nullptr) {
-		curr = head;
-		head = head->nextElement;
-		delete curr;
-	}
+	Purge();
 }
 
 template<typename T>
 void List<T>::Purge()
 {
-		Node<T>* curr = head;
-		while (head != nullptr) {
-			curr = head;
-			head = head->nextElement;
+		Node<T>* curr = head; 
+		Node<T>* next = nullptr;
+
+		while (curr != nullptr) {
+			next = curr->nextElement;
 			delete curr;
+			curr = next;
 		}
-		tail = nullptr;
+
+		head = nullptr;
 }
 
 template<typename T>
