@@ -1,43 +1,4 @@
 
-//#include <iostream>
-//#include <string>
-//#include "List.h"
-//using std::string;
-//
-//const char* NAMES[] = { "Kyle", "Brit", "Seth", "Alex", "Josh", "Kian",
-//"Kate", "Terry", "Ann", "Elaine", "Stephanie", "Wanda", "Oscar",
-//"Oliver", "Tobey" };
-//
-//List<string> ReturnStrList()
-//{
-//	List<string> tempList;
-//	for (int i = 0; i < 10; ++i)
-//		tempList.Append(NAMES[i]);
-//	return tempList;
-//}
-//
-//int main() {
-	//bool pass = true;
-
-	//List<int> test_list;
-	//for (int i = 0; i < 10; ++i)
-	//	test_list.Append(i); 
-
-	//List<string> list_test;
-	//list_test = ReturnStrList(); // doesn't work
-
-	//test_list.PrintBackwards();
-	//test_list.PrintForwards();
-
-	// // Check data integrity
-
-	//cout << "Op equals test complex ";
-
-	//cout << pass;
-//}
-
-
-
 /*********************************************************************
 * Author: Junmin Yee
 * File Name: main.cpp
